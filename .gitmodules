@@ -1,0 +1,3 @@
+[submodule "backend"]
+	path = backend
+	url = git@github.com:ThiagoR0810/FinanceApp.git
