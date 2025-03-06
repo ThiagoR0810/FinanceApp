@@ -1,4 +1,8 @@
 import React, { createContext, useState } from "react";
+import SignUp from "../pages/SignUp";
+
+import api from "../services/api";
+import { useNavigation } from "@react-navigation/native";
 
 export const AuthContext = createContext({});
 
@@ -7,8 +11,25 @@ function AuthProvider({ children }) {
 		name: "Lucas",
 	});
 
+  const navigation = useNavigation();
+
+  async function signUp(name, email, password) {
+    try {
+      const response = await api.post("/users", {
+        name: name,
+        email: email,
+        password: password
+      });
+
+      navigation.goBack();
+
+    } catch (error) {
+      console.log("ERRO AO CADASTRAR", error);
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user}}>
+    <AuthContext.Provider value={{ user, signUp }}>
       {children}
     </AuthContext.Provider>
   );

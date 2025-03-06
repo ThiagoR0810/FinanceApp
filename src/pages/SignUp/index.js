@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text } from "react-native";
 
 import { 
@@ -13,10 +13,13 @@ import {
 import { AuthContext } from "../../contexts/auth";
 
 export default function SignUp() {
-  const { user } = useContext(AuthContext);
+  const { signUp } = useContext(AuthContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleSignUp() {
-    console.log(user);
+    signUp(name, email, password);
   }
 
   return (
@@ -29,18 +32,25 @@ export default function SignUp() {
         <AreaInput>
           <Input
             placeholder="Nome"
+            value={name}
+            onChangeText={ (text) => setName(text) }
           />
         </AreaInput>
 
         <AreaInput>
           <Input
             placeholder="E-mail"
+            value={email}
+            onChangeText={ (text) => setEmail(text) }
           />
         </AreaInput>
 
         <AreaInput>
           <Input
             placeholder="Senha"
+            value={password}
+            onChangeText={ (text) => setPassword(text) }
+            secureTextEntry={true}
           />
         </AreaInput>
 
