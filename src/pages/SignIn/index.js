@@ -31,13 +31,13 @@ export default function SignIn() {
 
         <AreaInput>
           <Input
-            placeholder="Seu e-mail"
+            placeholder="E-mail"
           />
         </AreaInput>
 
         <AreaInput>
           <Input
-            placeholder="Sua senha"
+            placeholder="Senha"
           />
         </AreaInput>
 
