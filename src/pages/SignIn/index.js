@@ -22,7 +22,7 @@ export default function SignIn() {
     <Background>
 
       <Container
-        behavior={"padding"}
+        behavior={Platform.OS === "ios" ? "padding" : "padding"}
         enabled
       >
         <Logo
