@@ -24,6 +24,7 @@ import Icon from "@react-native-vector-icons/material-icons";
 export default function Home() {
   const isFocused = useIsFocused();
   const [listBalance, setListBalance] = useState([]);
+  const [movements, setMovements] = useState([]);
 
   const [dateMovements, setDateMovements] = useState(new Date());
 
@@ -33,6 +34,12 @@ export default function Home() {
     async function getMovements() {
       let dateFormated = format(dateMovements, "dd/MM/yyyy");
 
+      const receives = await api.get('/receives', {
+        params:{
+          date: dateFormated
+        }
+      })
+
       const balance = await api.get('/balance', {
         params:{
           date: dateFormated
@@ -40,6 +47,7 @@ export default function Home() {
       })
 
       if (isActive) {
+        setMovements(receives.data);
         setListBalance(balance.data);
       }
     }
@@ -69,10 +77,11 @@ export default function Home() {
       </Area>
 
       <List 
-        data={[]}
+        data={movements}
         keyExtractor={ item => item.id }
-        renderItem={ ({ item }) => <ListRecord /> }
+        renderItem={ ({ item }) => <ListRecord data={item} /> }
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 20 }}
       />
     </Background>
   );

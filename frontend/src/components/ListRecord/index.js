@@ -1,10 +1,31 @@
 import React from "react";
-import { Container, TextType } from "./styles";
+import { 
+  Container, 
+  TextType,
+  Type,
+  IconView,
+  TextValue
+} from "./styles";
 
-export default function ListRecord() {
+import Icon from "@react-native-vector-icons/feather";
+
+export default function ListRecord({ data }) {
   return (
     <Container>
-      <TextType> Teste Tipo </TextType>
+      <Type>
+        <IconView type={data.type} >
+          <Icon 
+            name={data.type === 'despesa' ? 'arrow-down' : 'arrow-up'}
+            size={20} 
+            color="#FFF" 
+          />
+          <TextType>{data.type}</TextType>
+        </IconView>
+      </Type>
+
+      <TextValue>
+        R$ {data.value}
+      </TextValue>
     </Container>
   );
 }
